@@ -1,0 +1,36 @@
+{
+    "name": "mpapi",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+        "build": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@prisma/client": "^6.12.0",
+        "bcrypt": "^6.0.0",
+        "celebrate": "^15.0.3",
+        "dayjs": "^1.11.13",
+        "express": "^5.1.0",
+        "express-async-handler": "^1.2.0",
+        "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^6.0.0",
+        "@types/express": "^5.0.3",
+        "@types/jest": "^30.0.0",
+        "@types/node": "^24.0.15",
+        "jest": "^30.0.5",
+        "prisma": "^6.12.0",
+        "ts-jest": "^29.4.0",
+        "ts-node-dev": "^2.0.0",
+        "tsc-watch": "^7.1.1",
+        "typescript": "^5.8.3"
+    }
+}
