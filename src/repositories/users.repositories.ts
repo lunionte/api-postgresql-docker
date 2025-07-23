@@ -1,19 +1,21 @@
 import { PrismaClient } from "../generated/prisma";
-import { toUserDto, toUsersDto, User } from "../models/users.models";
+import { UpdatedUserDto, UserModel } from "../models/users.models";
 
 const prisma = new PrismaClient();
 
 export class UsersRepositories {
     async findAllUsers() {
-        const allUsers = await prisma.user.findMany();
-
-        return toUsersDto(allUsers);
+        return await prisma.user.findMany();
     }
 
-    async find(userId: string) {}
+    async findById(id: string) {
+        return await prisma.user.findUnique({
+            where: { id },
+        });
+    }
 
-    async createUser(user: User) {
-        const createdUser = await prisma.user.create({
+    async createUser(user: UserModel) {
+        return await prisma.user.create({
             data: {
                 id: user.id,
                 email: user.email,
@@ -23,6 +25,12 @@ export class UsersRepositories {
                 updatedAt: user.updatedAt,
             },
         });
-        return toUserDto(createdUser);
+    }
+
+    async updateUser(id: string, data: UpdatedUserDto) {
+        return await prisma.user.update({
+            where: { id },
+            data,
+        });
     }
 }
