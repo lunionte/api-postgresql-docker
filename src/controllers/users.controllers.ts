@@ -3,8 +3,8 @@ import { UsersService } from "../services/users.services";
 import { UpdatedUserDto, UserModel } from "../models/users.models";
 
 export class UsersController {
-    static async findAllUsers(req: Request, res: Response) {
-        res.json(await new UsersService().findAllUsers());
+    static async search(req: Request, res: Response) {
+        res.json(await new UsersService().search(req.query));
     }
 
     static async findById(req: Request, res: Response) {

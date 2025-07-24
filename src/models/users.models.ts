@@ -10,6 +10,12 @@ export interface UserModel {
     updatedAt?: Date;
 }
 
+export interface UserQueryParamsModel {
+    id?: string;
+    email?: string;
+    name?: string;
+}
+
 export interface UpdatedUserDto {
     name?: string;
     email?: string;
@@ -40,4 +46,10 @@ export const updatedUserSchema = Joi.object().keys({
     name: Joi.string().trim().min(3).optional(),
     email: Joi.string().email().optional(),
     password: Joi.string().trim().min(6).optional(),
+});
+
+export const searchParamsSchema = Joi.object().keys({
+    id: Joi.string().uuid().trim().optional(),
+    name: Joi.string().trim().min(3).optional(),
+    email: Joi.string().trim().min(3).optional(),
 });

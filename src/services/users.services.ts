@@ -1,4 +1,4 @@
-import { toUserDto, toUsersDto, UpdatedUserDto, UserModel } from "../models/users.models";
+import { toUserDto, toUsersDto, UpdatedUserDto, UserModel, UserQueryParamsModel } from "../models/users.models";
 import { UsersRepositories } from "../repositories/users.repositories";
 import { validate as isUuid } from "uuid";
 import bcrypt from "bcrypt";
@@ -10,8 +10,8 @@ export class UsersService {
         this.userRepository = new UsersRepositories();
     }
 
-    async findAllUsers() {
-        const allUsers = await this.userRepository.findAllUsers();
+    async search(queryParams: UserQueryParamsModel) {
+        const allUsers = await this.userRepository.search(queryParams);
 
         return toUsersDto(allUsers);
     }

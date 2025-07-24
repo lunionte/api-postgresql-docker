@@ -1,11 +1,33 @@
 import { PrismaClient } from "../generated/prisma";
-import { UpdatedUserDto, UserModel } from "../models/users.models";
+import { UpdatedUserDto, UserModel, UserQueryParamsModel } from "../models/users.models";
 
 const prisma = new PrismaClient();
 
 export class UsersRepositories {
-    async findAllUsers() {
-        return await prisma.user.findMany();
+    async search(queryParams: UserQueryParamsModel) {
+        const { id, name, email } = queryParams;
+
+        const where: any = {};
+
+        if (id) {
+            where.id = id;
+        }
+
+        if (name) {
+            where.name = {
+                contains: name,
+                mode: "insensitive",
+            };
+        }
+
+        if (email) {
+            where.email = {
+                contains: email,
+                mode: "insensitive",
+            };
+        }
+
+        return await prisma.user.findMany({ where });
     }
 
     async findById(id: string) {
